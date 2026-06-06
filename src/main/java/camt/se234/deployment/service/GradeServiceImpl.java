@@ -5,19 +5,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GradeServiceImpl implements GradeService {
+
     @Override
     public String getGrade(double score) {
-        if (score > 79.5) {
+        // add a new rule
+        if (score > 90.0) {
+            return "A+";
+        } else if (score > 80.0) {
             return "A";
-        }
-        else if (score > 74.5){
+        } else if (score > 70.0) {
             return "B";
-        }else if (score > 59.5){
+        } else if (score > 60.0) {
             return "C";
-        }else if (score > 32.5) {
-            return "D";
-        } else
+        } else {
             return "F";
-
+        }
     }
 }
