@@ -1,0 +1,7 @@
+services:
+  backend:
+    image: wyj1018/234-deploylab-backend:new-grade
+    pull_policy: always
+    ports:
+      - "8083:8080"  # 使用不同的端口，与旧版本8082区分
+    restart: unless-stopped
