@@ -2,7 +2,7 @@ package camt.se234.deployment.service;
 
 import camt.se234.deployment.entity.Grade;
 import org.springframework.stereotype.Service;
-
+// Added for DeepSource scan
 @Service
 public class GradeServiceImpl implements GradeService {
 
