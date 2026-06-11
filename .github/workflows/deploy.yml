@@ -18,10 +18,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: DeepSource Scan
-        uses: deepsourcelabs/action@v2
-        with:
-          dsn: ${{ secrets.DEEPSOURCE_DSN }}
+      - name: Install DeepSource CLI
+        run: curl -fsSL https://cli.deepsource.com/install | sh
+
+      - name: Run DeepSource security scan
+        env:
+          DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+        run: deepsource analyze
 
   build:
     runs-on: ubuntu-latest
