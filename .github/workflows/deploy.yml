@@ -7,9 +7,24 @@ on:
       - feature/new-grade-criteria
 
 jobs:
+  # 新增：DeepSource代码安全扫描
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run DeepSource security scan
+        uses: deepsourcelabs/analyze-action@v1
+        with:
+          dsn: ${{ secrets.DEEPSOURCE_DSN }}
+
   # 核心任务：构建Docker镜像并推送到Docker Hub（这就是"部署到Docker容器"）
   build-and-deploy:
     runs-on: ubuntu-latest
+    needs: security-scan # 等待安全扫描通过后再构建镜像
     steps:
       - name: 1. Checkout code from GitHub
         uses: actions/checkout@v4
